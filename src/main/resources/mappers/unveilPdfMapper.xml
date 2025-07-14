@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pj.pdf.dao.UnveilPdfDAO">
+    <select id="idCheck" parameterType="String" resultType="Integer">
+        SELECT  count(*)
+        FROM usertable
+        WHERE userId = #{userId}
+    </select>
+
+    <insert id="saveJoinForm" parameterType="com.pj.pdf.vo.UnveilPdfVO">
+        INSERT INTO usertable
+        (userId, userPwd, userName, createdAt)
+        VALUES(#{userId}, #{userPwd}, #{userName}, sysdate())
+    </insert>
+
+
+    <select id="userChk" parameterType="com.pj.pdf.vo.UnveilPdfVO" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT u.userSeq, u.userId, u.userPwd, u.userName
+        FROM usertable u
+        WHERE userId = #{userId} AND userPwd = #{userPwd}
+    </select>
+
+    <select id="findUserById" parameterType="String" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT  u.userId, u.userPwd, u.userName,
+        FROM usertable u
+            LEFT JOIN kboteam k ON k.teamID = u.teamID
+        WHERE userId = #{userId}
+    </select>
+
+    <update id="updateUser" parameterType="com.pj.pdf.vo.UnveilPdfVO">
+        UPDATE usertable
+        SET
+            MDF_DT = sysdate()
+        <if test="userPwd != null and userPwd != ''">
+            , userPwd = #{userPwd}
+        </if>
+        <if test="userName != null and userName != ''">
+            , userName = #{userName}
+        </if>
+        WHERE userId = #{userId}
+    </update>
+
+</mapper>
