@@ -80,7 +80,6 @@ public class UnveilPdfController {
             session.setAttribute("userId", vo.getUserId());
             session.setAttribute("userName", userName);
             session.setAttribute("userSeq", userChk.getUserSeq());
-            session.setAttribute("userPoint", userChk.getUserPoint());
             return userName; // 로그인 성공
         }
         return "";
@@ -109,10 +108,6 @@ public class UnveilPdfController {
             map.put("status", "success");
             map.put("userId", user.getUserId());
             map.put("userName", user.getUserName());
-            map.put("phone", user.getUserPhoneNumber());
-            map.put("point", user.getUserPoint());
-            map.put("birthday", user.getUserBirty());
-            map.put("email", user.getEmail());
         } else {
             map.put("status", "fail");
             map.put("message", "로그인 정보가 없습니다.");

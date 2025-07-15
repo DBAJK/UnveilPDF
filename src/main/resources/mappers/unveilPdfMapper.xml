@@ -4,34 +4,33 @@
 <mapper namespace="com.pj.pdf.dao.UnveilPdfDAO">
     <select id="idCheck" parameterType="String" resultType="Integer">
         SELECT  count(*)
-        FROM usertable
+        FROM user
         WHERE userId = #{userId}
     </select>
 
     <insert id="saveJoinForm" parameterType="com.pj.pdf.vo.UnveilPdfVO">
-        INSERT INTO usertable
-        (userId, userPwd, userName, createdAt)
-        VALUES(#{userId}, #{userPwd}, #{userName}, sysdate())
+        INSERT INTO user
+        (userId, userPwd, userAut, userName, createDt)
+        VALUES(#{userId}, #{userPwd}, #{userAut}, #{userName}, sysdate())
     </insert>
 
 
     <select id="userChk" parameterType="com.pj.pdf.vo.UnveilPdfVO" resultType="com.pj.pdf.vo.UnveilPdfVO">
         SELECT u.userSeq, u.userId, u.userPwd, u.userName
-        FROM usertable u
+        FROM user u
         WHERE userId = #{userId} AND userPwd = #{userPwd}
     </select>
 
     <select id="findUserById" parameterType="String" resultType="com.pj.pdf.vo.UnveilPdfVO">
-        SELECT  u.userId, u.userPwd, u.userName,
-        FROM usertable u
-            LEFT JOIN kboteam k ON k.teamID = u.teamID
+        SELECT  u.userId, u.userPwd, u.userName
+        FROM user u
         WHERE userId = #{userId}
     </select>
 
     <update id="updateUser" parameterType="com.pj.pdf.vo.UnveilPdfVO">
-        UPDATE usertable
+        UPDATE user
         SET
-            MDF_DT = sysdate()
+            mdfDt = sysdate()
         <if test="userPwd != null and userPwd != ''">
             , userPwd = #{userPwd}
         </if>

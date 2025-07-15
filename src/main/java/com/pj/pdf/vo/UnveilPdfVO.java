@@ -14,11 +14,8 @@ public class UnveilPdfVO {
     private int userSeq;
     private String userId;
     private String userPwd;
-    private String email;
     private String userName;
-    private String userBirty;
-    private String userPhoneNumber;
-    private int userPoint;
-    private String createAt;
+    private String userAut;
+    private String createDt;
     private String mdfDt;
 }
