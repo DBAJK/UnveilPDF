@@ -34,7 +34,10 @@ public class UnveilPdfController {
     public String joinRedirect() {
         return "redirect:/?formType=join";
     }
-
+    @GetMapping("/mainForm")
+    public String mainRedirect() {
+        return "redirect:/?formType=main";
+    }
     // 회원가입
     @RequestMapping("/saveJoinForm")
     @ResponseBody

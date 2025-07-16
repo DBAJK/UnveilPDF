@@ -7,7 +7,7 @@
 <link href="/resources/css/main.css" rel="stylesheet" type="text/css">
 <html>
 <head>
-    <title>KBO board</title>
+    <title>UnveilPDF</title>
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>
@@ -21,7 +21,7 @@
                 <%@ include file="joinForm.jsp" %>
             </c:when>
             <c:otherwise>
-                <%@ include file="loginForm.jsp" %>
+                <%@ include file="mainForm.jsp" %>
             </c:otherwise>
 
         </c:choose>
