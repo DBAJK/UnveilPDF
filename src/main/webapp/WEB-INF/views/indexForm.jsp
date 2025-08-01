@@ -20,6 +20,21 @@
             <c:when test="${formType eq 'join'}">
                 <%@ include file="joinForm.jsp" %>
             </c:when>
+            <c:when test="${formType eq 'myPage'}">
+                <%@ include file="myPage.jsp" %>
+            </c:when>
+            <c:when test="${formType eq 'pjRegist'}">
+                <%@ include file="pjRegist.jsp" %>
+            </c:when>
+            <c:when test="${formType eq 'pjDetail'}">
+                <%@ include file="pjDetail.jsp" %>
+            </c:when>
+            <c:when test="${formType eq 'ocrForm'}">
+                <%@ include file="ocrForm.jsp" %>
+            </c:when>
+            <c:when test="${formType eq 'pdfResult'}">
+                <%@ include file="pdfResult.jsp" %>
+            </c:when>
             <c:otherwise>
                 <%@ include file="mainForm.jsp" %>
             </c:otherwise>

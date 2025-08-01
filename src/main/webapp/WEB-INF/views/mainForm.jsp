@@ -14,27 +14,30 @@
 <link href="/resources/css/main.css" rel="stylesheet" type="text/css">
 <style>
     .container {
-        max-width: 1200px;
+        width: 80%;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-
     .main-title {
         font-size: 2.5rem;
         font-weight: 700;
         color: #4a5cc6;
         margin-bottom: 3rem;
         text-align: center;
+        width: 100%;
     }
-
     .project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* 왼쪽 정렬 */
+        gap: 1rem 2rem; /* 세로/가로 간격 */
+        width: 100%;
     }
-
     .project-card {
+        width: 150px; /* 원하는 카드 너비 */
         background: white;
         border-radius: 16px;
         padding: 3rem 2rem;
@@ -43,6 +46,7 @@
         transition: all 0.3s ease;
         cursor: pointer;
         border: 2px solid transparent;
+        flex: none; /* flex-grow 막기 */
     }
 
     .project-card:hover {
@@ -94,7 +98,7 @@
         }
 
         .project-card {
-            padding: 2rem 1rem;
+            width: 100%;
         }
     }
 </style>
@@ -102,32 +106,30 @@
     <h1 class="main-title">프로젝트 조회</h1>
 
     <div class="project-grid">
-        <div class="project-card" onclick="openProject('약위동향관리시스템')">
-            <div class="project-title">약위동향관리시스템</div>
-        </div>
-
-        <div class="project-card" onclick="openProject('처분부당금시스템')">
-            <div class="project-title">처분부당금시스템</div>
-        </div>
+        <c:forEach var="project" items="${projectList}">
+            <div class="project-card" onclick="openProject(${project.projectId}, '${project.projectName}')">
+                <div class="project-title">${project.projectName}</div>
+            </div>
+        </c:forEach>
 
         <div class="project-card add-card" onclick="addProject()">
             <div class="add-icon">+</div>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript" >
-    function openProject(projectName) {
-        alert(`${projectName} 프로젝트를 열었습니다.`);
+    $(document).ready(function() {
+        loadProject();
+    });
+
+    function openProject(projectId, projectName) {
+        const encodedName = encodeURIComponent(projectName);
+        window.location.href = "/?formType=pjDetail&projectId=" + projectId + "&projectName=" + projectName;
     }
 
     function addProject() {
-        const projectName = prompt('새 프로젝트 이름을 입력하세요:');
-        if (projectName && projectName.trim()) {
-            alert(`${projectName} 프로젝트가 추가되었습니다.`);
-            // 여기서 실제로는 새 프로젝트 카드를 추가하는 로직을 구현할 수 있습니다.
-        }
+        window.location.href = '/pjRegist';
     }
 
     // 카드 호버 효과 개선
@@ -140,4 +142,14 @@
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
+
+    function loadProject() {
+        $.ajax({
+            url: '/service/getProjectList',
+            success: function(html) {
+                $('.container').html(html); // container 영역만 갱신
+            }
+        });
+    }
+
 </script>

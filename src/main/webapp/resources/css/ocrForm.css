@@ -1,0 +1,100 @@
+.container {
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ocr-content {
+    padding: 40px;
+}
+
+.title {
+    color: #6366f1;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.ocr-section {
+    background: #deecff;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.ocr-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.ocr-description {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+
+.file-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.file-line {
+    width: 40px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+.file-line:nth-child(2) {
+    width: 35px;
+}
+
+.file-line:nth-child(3) {
+    width: 45px;
+}
+
+.file-line:nth-child(4) {
+    width: 30px;
+}
+
+.drag-drop-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
+.dropzone {
+    border: 3px dashed #ccc;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.dropzone:hover {
+    border-color: #6366f1;
+    background-color: #f8f9ff;
+}
+
+.dropzone.dragover {
+    border-color: #6366f1;
+    background-color: #f0f4ff;
+}

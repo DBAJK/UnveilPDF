@@ -17,4 +17,16 @@ public interface UnveilPdfDAO {
 
     void updateUser(UnveilPdfVO vo) throws Exception;
 
+    void savePjForm(UnveilPdfVO vo) throws Exception;
+
+    List<UnveilPdfVO> getUserList();
+
+    List<UnveilPdfVO> getProjectList(UnveilPdfVO vo);
+    List<UnveilPdfVO> getProjectById(int projectId);
+
+    void insertPdfFile(UnveilPdfVO vo) throws Exception;
+    void insertOcrResult(UnveilPdfVO vo) throws Exception;
+    int getPdfId() throws Exception;
+
+    List<UnveilPdfVO> getPdfResultData(int pdfId) ;
 }

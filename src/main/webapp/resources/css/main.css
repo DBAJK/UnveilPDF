@@ -22,14 +22,14 @@
 .contentArea .headerArea {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* 필요에 따라 space-between 또는 flex-start */
-    padding: 0 0 20px 0; /* 아래 여백 등 필요에 따라 조정 */
+    justify-content: space-between;
+    padding: 0 0 20px 0;
 }
 .contentArea .headerArea span {
     font-size: 50px;
     color: #4a5cc6;
     font-weight: bold;
-    margin-right: 20px; /* 버튼과 간격 */
+    margin-right: 20px;
     letter-spacing: 1px;
 }
 
@@ -430,4 +430,40 @@
 
 .tab li.on a::after {
     display: none;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555555;
+    transition: color 0.3s ease;
+}
+
+.radio-label:hover {
+    color: #4A90E2;
+}
+
+.radio {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    accent-color: #4A90E2;
+    cursor: pointer;
+}
+
+.radio-label:has(.radio:checked) {
+    color: #4A90E2;
+    font-weight: 600;
+}
+
+.radio:focus {
+    outline: 2px solid #4A90E2;
+    outline-offset: 2px;
 }

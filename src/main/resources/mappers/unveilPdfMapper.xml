@@ -14,7 +14,6 @@
         VALUES(#{userId}, #{userPwd}, #{userAut}, #{userName}, sysdate())
     </insert>
 
-
     <select id="userChk" parameterType="com.pj.pdf.vo.UnveilPdfVO" resultType="com.pj.pdf.vo.UnveilPdfVO">
         SELECT u.userSeq, u.userId, u.userPwd, u.userName
         FROM user u
@@ -40,4 +39,53 @@
         WHERE userId = #{userId}
     </update>
 
+    <select id="getUserList" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT u.userSeq, u.userId, u.userName
+        FROM user u
+    </select>
+
+    <insert id="savePjForm" parameterType="com.pj.pdf.vo.UnveilPdfVO">
+        INSERT INTO project
+            (userSeq, projectName, isPublic, userVisibility)
+        VALUES('1', #{projectName}, #{isPublic}, #{userVisibility})
+    </insert>
+
+    <select id="getProjectList" parameterType="com.pj.pdf.vo.UnveilPdfVO" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT projectId, projectName, isPublic, userVisibility
+        FROM project
+        WHERE 1=1
+            AND FIND_IN_SET(#{userId}, userVisibility) > 0
+    </select>
+
+    <select id="getProjectById" parameterType="int" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT pdfId, userSeq, projectId, fileName, filePath, fileType, status, uploadDt
+        FROM pdf_file
+        WHERE 1=1
+              AND projectId = #{projectId}
+    </select>
+
+
+    <insert id="insertPdfFile" parameterType="com.pj.pdf.vo.UnveilPdfVO">
+        INSERT INTO pdf_file (userSeq, projectId, fileName, filePath, fileType, status)
+        VALUES (#{userSeq}, #{projectId}, #{fileName}, #{filePath}, #{fileType}, #{status})
+    </insert>
+
+    <select id="getPdfId" resultType="Integer">
+        SELECT max(pdfId) as pdfId
+        FROM pdf_file
+    </select>
+
+    <insert id="insertOcrResult" parameterType="com.pj.pdf.vo.UnveilPdfVO">
+        INSERT INTO ocr_result (pdfId, pageNo, ocrText)
+        VALUES ((SELECT max(pdfId) FROM pdf_file), #{pageNo}, #{ocrText})
+    </insert>
+
+    <select id="getPdfResultData" parameterType="int" resultType="com.pj.pdf.vo.UnveilPdfVO">
+        SELECT a.ocrId, a.pdfId, a.pageNo, a.ocrText
+            , pf.fileName,REPLACE(pf.filePath, '\\', '/') AS filePath, pf.fileType
+        FROM ocr_result as a
+            LEFT JOIN pdf_file pf on pf.pdfId = a.pdfId
+        WHERE 1=1
+          AND a.pdfId = #{pdfId}
+    </select>
 </mapper>
